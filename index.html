@@ -1,1 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Физический Помощник: Генератор Чертежей</title>
+    <script src="https://unpkg.com/konva@8.3.0/konva.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+    <header>
+        <h1>Физический Помощник ⚛️</h1>
+        <p>Введите условие школьной задачи, чтобы получить чертеж и формулы.</p>
+    </header>
+
+    <div class="container">
+        
+        <section class="input-panel">
+            <h2>Введите условие задачи:</h2>
+            <textarea id="taskInput" rows="6" placeholder="Например: Брусок массой 2 кг скользит по наклонной плоскости с углом 30 градусов. Коэффициент трения 0.2. Найдите ускорение."></textarea>
+            <button id="generateBtn">Сгенерировать Чертеж</button>
+        </section>
+
+        <section class="output-panel">
+            <div class="drawing-area">
+                <h2>Чертеж и Силы </h2>
+                <div id="diagramContainer"></div> 
+            </div>
+            
+            <div class="formula-area">
+                <h2>Формулы и Решение</h2>
+                <p id="formulaOutput">Здесь появятся формулы, описывающие данную ситуацию.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2025 Physics Helper. Powered by AI and Konva.js.</p>
+    </footer>
+
+    <script src="main.js"></script>
+
+</body>
+</html>
