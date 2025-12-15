@@ -1,40 +1,167 @@
+/* --- 1. Определение Цветовых Переменных --- */
+:root {
+    --color-dark-blue: #0A1931;
+    --color-medium-blue: #182B4D;
+    --color-light-blue: #3C5B8B;
+    --color-accent-blue: #64FFDA; /* Яркий акцент для кнопок */
+    --color-text-light: #ccd6f6;
+    --color-text-dark: #8892b0;
+    --gradient-bg: linear-gradient(135deg, var(--color-medium-blue) 0%, var(--color-dark-blue) 100%);
+    --gradient-header: linear-gradient(45deg, #2A4072, #182B4D);
+    --shadow-soft: 0 4px 10px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --transition-speed: 0.3s;
+}
+
+/* --- 2. Глобальные Стили --- */
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f0f2f5;
-    color: #333;
+    background: var(--gradient-bg); /* Основной фон */
+    color: var(--color-text-light);
+    min-height: 100vh;
+    transition: background-color var(--transition-speed);
 }
+
+/* --- 3. Шапка (Header) --- */
 header {
-    background-color: #007bff;
-    color: white;
-    padding: 20px;
+    background: var(--gradient-header);
+    padding: 40px 20px 20px;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-soft);
+    border-bottom: 2px solid var(--color-light-blue);
 }
+header h1 {
+    margin-bottom: 5px;
+    font-size: 2.5em;
+    color: var(--color-accent-blue);
+}
+header p {
+    color: var(--color-text-dark);
+}
+
+/* --- 4. Контейнер и Секции --- */
 .container {
     width: 90%;
     max-width: 1200px;
-    margin: 20px auto;
+    margin: 40px auto;
     display: flex;
-    gap: 20px;
+    gap: 25px;
 }
+h2 {
+    color: var(--color-accent-blue);
+    border-bottom: 1px solid var(--color-light-blue);
+    padding-bottom: 10px;
+    margin-top: 0;
+}
+section {
+    background: var(--color-medium-blue);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+}
+section:hover {
+    transform: translateY(-3px); /* Эффект подъема при наведении */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* --- 5. Панели (Input/Output) --- */
 .input-panel {
     flex: 1;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .output-panel {
     flex: 2;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
+.drawing-area, .formula-area {
+    /* Чтобы обе области внутри output-panel имели одинаковое фоновое оформление */
+    background: var(--color-medium-blue); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3); /* Внутренняя тень */
+}
+#diagramContainer {
+    border: 1px solid var(--color-light-blue);
+    background-color: var(--color-dark-blue);
+    height: 400px; 
+    margin-top: 15px;
+    border-radius: 6px;
+}
+
+/* --- 6. Элементы Формы --- */
 #taskInput {
     width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-light-blue);
+    border-radius: 6px;
+    box-sizing: border-box;
+    background-color: var(--color-dark-blue);
+    color: var(--color-text-light);
+    resize: none; /* Запрещаем изменение размера пользователем */
+    transition: border-color var(--transition-speed);
+}
+#taskInput:focus {
+    border-color: var(--color-accent-blue);
+    outline: none;
+}
+::placeholder { /* Стили для текста-заполнителя */
+    color: var(--color-text-dark);
+    opacity: 0.7;
+}
+
+/* --- 7. Кнопка --- */
+#generateBtn {
+    padding: 12px 25px;
+    background-color: var(--color-accent-blue);
+    color: var(--color-dark-blue); /* Темный текст на светлой кнопке */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+}
+#generateBtn:hover {
+    background-color: #8affd1; /* Немного светлее при наведении */
+    transform: scale(1.02);
+}
+#generateBtn:active {
+    transform: scale(0.98);
+}
+
+/* --- 8. Футер --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    color: var(--color-text-dark);
+    font-size: 0.9em;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 9. Стили для Формул (KaTeX) --- */
+#formulaOutput {
+    color: var(--color-text-light);
+    min-height: 100px;
+    padding: 10px;
+    /* Убедимся, что формулы внутри имеют хороший фон */
+}
+.katex {
+    font-size: 1.2em; /* Увеличим размер формул */
+    color: var(--color-text-light);
+}
+
+/* Медиа-запрос для адаптивности */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
